@@ -249,10 +249,7 @@ async def handle_download(client, cq):
             except Exception as err:
                 print("Channel Upload Error:", err)
 
-            except Exception as e:
-            
-                print("Upload Error:", e)            
-            
+
        # Video upload (with splitting for >2GB)
         chunk_files = split_video(safe_path)
 
