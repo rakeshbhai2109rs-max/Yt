@@ -32,7 +32,8 @@ async def youtube_downloader(client, message):
     url = message.text.strip()
     processing_msg = await message.reply_text("🔍 **Fetching available formats...**")
 
-    ydl_opts = {"quiet": True, "no_warnings": True, "cookiefile": "cookies.txt"}
+    ydl_opts = {"quiet": True, "no_warnings": True, "cookiefile": "cookies.txt",
+"nocheckcertificate": True}
     buttons = []
 
     try:
