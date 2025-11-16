@@ -154,6 +154,10 @@ async def song_search(client, message):
     await message.reply_text(f"🎵 Search results for **{query}**...")
 
     ydl_opts = {
+        "cookies": "./cookies.txt",
+        "ffmpeg_location": "/usr/bin/ffmpeg"
+    }
+
         "quiet": True,
         "skip_download": True,
         "extract_flat": True,
@@ -370,3 +374,4 @@ async def download_music(client, cq: CallbackQuery):
 
     USER_LOCKS.pop(user, None)
     SEARCH_CACHE.pop(search_id, None)
+
