@@ -165,6 +165,7 @@ async def handle_download(client, cq):
             "outtmpl": output,
             "quiet": True,
             "cookiefile": "cookies.txt",
+            "nocheckcertificate": True,
             "retries": 5,
             "socket_timeout": 30,
             "noprogress": True,
