@@ -1,4 +1,5 @@
 tgcrypto
+requests
 pyrofork
 yt_dlp
 flask
