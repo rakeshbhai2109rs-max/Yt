@@ -16,8 +16,35 @@ from Youtube.forcesub import handle_force_subscribe, humanbytes
 import subprocess
 import math
 
+COOKIES_FILE = "cookies.txt"  # Keep this file in project root
+
+def download_youtube_audio(url, output_path):
+    # Prepare yt-dlp options with cookies support
+    ydl_opts = {
+        "format": "bestaudio/best",
+        "outtmpl": f"{output_path}.%(ext)s",
+        "cookies": COOKIES_FILE if os.path.exists(COOKIES_FILE) else None,
+        "postprocessors": [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "320",
+            }
+        ],
+        "noplaylist": True,
+    }
+
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url)
+            return f"{output_path}.mp3", info.get("title")
+
+    except Exception as e:
+        return None, f"❌ Download failed: {e}"
+
 
 YT_CACHE = {}
+
 
 # ══════════════════════════════════════════════════════════════
 # 🔹 MESSAGE HANDLER — Fetch available formats
